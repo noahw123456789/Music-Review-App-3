@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>All Songs</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div id="song-page-top-container">
+        <h1>Featured Songs</h1>
+        <div class="songs-container">
+            {% for song in songs[5:8] %}
+            <div class="song-card-homepage">
+                <div class="song-media">
+                    <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+                    <audio controls>
+                        <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="song-details">
+                    <p>Title: {{ song.song_title }}</p>
+                    <p>Artist: {{ song.artist_name }}</p>
+                    <p>Release Year: {{ song.release_year }}</p>
+                    <p>Album: {{ song.album }}</p>
+                    <p>Genre: {{ song.genre }}</p>
+                    <div class="rate-button-songs">
+                        <a href="{{ url_for('song_rating', id=song.id) }}">Rate it</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div id="song-page-bottom-container">
+        <h1>All Songs</h1>
+        <div class="songs-container">
+            {% for song in songs %}
+            <div class="song-card-homepage">
+                <div class="song-media">
+                    <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+                    <audio controls>
+                        <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="song-details">
+                    <p>Title: {{ song.song_title }}</p>
+                    <p>Artist: {{ song.artist_name }}</p>
+                    <p>Release Year: {{ song.release_year }}</p>
+                    <p>Album: {{ song.album }}</p>
+                    <p>Genre: {{ song.genre }}</p>
+                    <div class="rate-button-songs">
+                        <a href="{{ url_for('song_rating', id=song.id) }}">Rate it</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

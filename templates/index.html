@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>All Songs</title>
+
+</head>
+<body>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div id="heroimage">
+        <img src="/static/Images/hero-image.png" alt="Hero-Image">
+    </div>
+
+    <div id="title-text">
+        <h1>Welcome to Rate my Track</h1>
+        <p>Our platform is designed to enhance your musical experience by allowing you to explore, listen to, and rate a wide variety of songs. With an interactive interface, you can easily navigate through featured tracks and a comprehensive collection of music, helping you discover new favorites while revisiting cherished classics.<br> <br>As a user, you have the opportunity to rate each song once, but you can edit or delete your ratings whenever you wish, ensuring your feedback reflects your current taste. Each rating is accompanied by a series of insightful questions that encourage you to think critically about the music you enjoy. <br><br>After sharing your thoughts, you can view your ratings on a dedicated page, allowing you to keep track of your musical journey and revisit your past experiences. Join us in celebrating the power of music and let your voice be heard!</p>
+        <form action="{{ url_for('all_songs') }}">
+            <button id="start-rating-button">Start Rating Now</button>
+            </form>
+        </div>
+</div>
+
+
+
+{% endblock %}
+
+</body>
