@@ -1,19 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>All Songs</title>
+{% extends 'base.html' %}
 
-</head>
-<body>
+{% block content %}
+<div id="rating-page-container">
+    <div id="rating-page-introduction">
+        <h1>Rate your song</h1>
+        <h4>Please answer the following questions</h4>
+    </div>
+    <div class="rating-page-song-info-container">
+        <div class="rating-page-song-media">
+            <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+            <audio controls>
+                <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="rating-page-song-details">
+            <h2>Song Infomation</h2>
+            <p>Title: {{ song.song_title }}</p>
+            <p>Artist: {{ song.artist_name }}</p>
+            <p>Release Year: {{ song.release_year }}</p>
+            <p>Album: {{ song.album }}</p>
+            <p>Genre: {{ song.genre }}</p>
+        </div>
+    </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
 
-    {% extends 'base.html' %}
+        <div id="song-rating-form">
+            <form method="post" enctype="multipart/form-data">
+                <h2>Rating Form</h2>
+                <label for="song_rating">What would you rate the song out of 5?:</label>
+                <input type="number" id="song_rating" name="song_rating" min="1" max="5">
+        
+                <label for="listen_again">Would you listen to it again?</label>
+                <input type="text" id="listen_again" name="listen_again" placeholder="Yes or No">
+        
+                <label for="recommend">Would you recommend it to others?</label>
+                <input type="text" id="recommend" name="recommend" placeholder="Yes or No">
+        
+                <label for="other_songs_by_artist">Other songs by this artist:</label>
+                <input type="text" id="other_songs_by_artist" name="other_songs_by_artist">
+        
+                <label for="lyrics_rating">Did you like the lyrics?</label>
+                <input type="text" id="lyrics_rating" name="lyrics_rating">
+      
+                <label for="guessed_genre">What genre do you think it is?</label>
+                <input type="text" id="guessed_genre" name="guessed_genre">
 
-    {% block content %}
-
+                <div id="submit-form-button">
+                    <button type="submit">Submit Rating</button>
+                </div>
+            </form>
+        </div>
+    
+</div>
     {% endblock %}
 
 </body>

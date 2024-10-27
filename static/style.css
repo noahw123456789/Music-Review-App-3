@@ -1,3 +1,8 @@
+@font-face {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    src: url(/static/Fonts/Inter-VariableFont_opsz\,wght.ttf) format('truetype')
+}
+
 body {
     background-image: url(/static/Images/Background-image.png);
     background-repeat: no-repeat;
@@ -10,6 +15,7 @@ nav{
     background-color: #E6AF07;
     height: 70px;
 }
+
 nav ul{
     list-style-type: none;
     margin: auto;
@@ -24,7 +30,6 @@ li h1{
     font-size: 20pt;
     margin-right: auto;
     display: block;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 li a{
@@ -64,16 +69,22 @@ li img{
 
 }
 
+#index-container{
+    width: 1920px;
+    margin: 0 auto;
+}
+
 #heroimage img{
-    width: 1240px;
+    width: 1040px;
     margin: 0 auto;
     float: left;
 }
 
 #title-text{
-    width: 650px;
-    height: 574px;
-    background-color: #f5f5f5;
+    width: 840px;
+    padding: 20px;
+    height: 442px;
+    background-color: #F4F1E7;
     float: left;
     margin: 0 auto;
 }
@@ -82,34 +93,44 @@ li img{
     font-size: 20pt;
     padding: 0 20px;
     color: #333;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Inter'
 }
 
 #title-text p{
     padding: 0 20px;
     font-size: 13pt;
     color: #333;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter';
+    display: flex;
 }
 
 #start-rating-button{
-    background-color: #d9d9d9;
-    padding: 15px 32px;
+    background-color: #E6AF07;
+    padding: 10px;
     color: #333;
     cursor: pointer;
-    margin: 75px 0 0 350px;
-    text-align: center;
-    font-weight: 700;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-decoration: none;
-    border-radius: 100px;
-    font-size: 20pt;
     border: none;
+    width: 270px;
+    font-weight: bold;
+    font-family: 'Inter';
+    margin-top: 60px;
+    margin-left: 340px;
+    text-decoration: none;
+    font-size: 18pt;
+    border-radius: 10px;
 }
 
 #start-rating-button:hover{
-    background-color: #b0b0b0;
+    background-color: #dca707;
 }
+
+#homepage-songs-container{
+    float: left;
+}
+
+
+
+
 
 #song-page-top-container {
     width: 1800px;
@@ -120,8 +141,9 @@ li img{
     margin: 40px auto;
     width: 1600px;
 }
+
 .song-card-homepage {
-    background-color: white;
+    background-color: #F4F1E7;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 20px;
@@ -130,22 +152,24 @@ li img{
     height: 500px;
     display: inline-flex;
 }
+
 .song-card-homepage :first-child{
     margin-left: 0px;
 }
-.song-media {
+
+.rating-page-song-media {
     margin-right: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .song-media img {
     width: 190px;
     border-radius: 8px;
     margin-bottom: 10px;
 }
-.song-details {
-
+.rating-page-song-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -172,4 +196,137 @@ li img{
 .rate-button-songs a:hover{
     background-color: #b0b0b0;
     cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Song Rating Page */
+
+#rating-page-container{
+    width: 1500px;
+    margin: 0 auto;
+
+}
+#rating-page-introduction{
+    width: 400px;
+    font-size: X-large;
+    font-family: 'Inter';
+    margin-top: 80px;
+}
+
+#rating-page-introduction h1 {
+    font-size: 2em;
+    font-weight: 750;
+}
+
+#rating-page-introduction h4{
+    font-weight: 450;
+    font-size: 1.17em;
+}
+
+/* Rating Page Song */
+
+.rating-page-song-info-container {
+    width: 670px; 
+    margin: 55px 50px 0 0;
+    float: left;
+    padding: 20px; 
+    display: flex;
+    background-color: #F4F1E7;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+.rating-page-song-media img {
+    width: 315px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.rating-page-song-media audio{
+    width: 315px;
+    display: flex;
+    border-radius: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+.rating-page-song-details {
+    margin: -17.99px 30px 0 20px;
+    font-family: 'Inter';
+    width: 300px;
+    height: 406px;
+    font-weight: 400;
+    vertical-align: middle;
+    font-size: 13pt;
+}
+.rating-page-song-details h2 {
+    font-family: 'Inter';
+    font-size: 1.5em;
+}
+/* Rating Page Form */
+
+#song-rating-form {
+    width: 517px; 
+    margin: -45px 50px 500px 0;
+    float: right;
+    padding: 20px; 
+    background-color: #F4F1E7;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+}
+
+#song-rating-form h2{
+    font-size: 2.2em;
+    font-family: 'Inter';
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 12px 0;
+    color: #333;
+    font-size: 13pt;
+    width: 580px;
+    font-family: 'Inter'
+}
+
+form input[type="text"], 
+form input[type="number"] {
+    padding: 8px;
+    width: 500px;
+    font-size: larger;
+    height: 15px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+}
+
+#submit-form-button button{
+    background-color: #E6AF07; 
+    color: #333;
+    padding: 10px; 
+    border: none; 
+    font: 'Int';
+    border-radius: 4px; 
+    margin-top: 15px;
+    cursor: pointer; 
+    float: right;
+    font-size: 16pt; 
+}
+
+#submit-form-button button:hover {
+    background-color: #dca707; 
 }

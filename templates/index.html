@@ -14,7 +14,7 @@
 
 {% block content %}
 
-<div class="container">
+<div id="index-container">
     <div id="heroimage">
         <img src="/static/Images/hero-image.png" alt="Hero-Image">
     </div>
@@ -26,6 +26,33 @@
             <button id="start-rating-button">Start Rating Now</button>
             </form>
         </div>
+
+    <div id="homepage-songs-container">
+        <h1>Featured Songs Today</h1>
+        <div class="songs-container">
+            {% for song in songs[5:8] %}
+            <div class="song-card-homepage">
+                <div class="song-media">
+                    <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+                    <audio controls>
+                        <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="song-details">
+                    <p>Title: {{ song.song_title }}</p>
+                    <p>Artist: {{ song.artist_name }}</p>
+                    <p>Release Year: {{ song.release_year }}</p>
+                    <p>Album: {{ song.album }}</p>
+                    <p>Genre: {{ song.genre }}</p>
+                    <div class="rate-button-songs">
+                        <a href="{{ url_for('song_rating', id=song.id) }}">Rate it</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 
