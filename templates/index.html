@@ -24,34 +24,35 @@
         <p>Our platform is designed to enhance your musical experience by allowing you to explore, listen to, and rate a wide variety of songs. With an interactive interface, you can easily navigate through featured tracks and a comprehensive collection of music, helping you discover new favorites while revisiting cherished classics.<br> <br>As a user, you have the opportunity to rate each song once, but you can edit or delete your ratings whenever you wish, ensuring your feedback reflects your current taste. Each rating is accompanied by a series of insightful questions that encourage you to think critically about the music you enjoy. <br><br>After sharing your thoughts, you can view your ratings on a dedicated page, allowing you to keep track of your musical journey and revisit your past experiences. Join us in celebrating the power of music and let your voice be heard!</p>
         <form action="{{ url_for('all_songs') }}">
             <button id="start-rating-button">Start Rating Now</button>
-            </form>
+        </form>
         </div>
 
-    <div id="homepage-songs-container">
-        <h1>Featured Songs Today</h1>
-        <div class="songs-container">
-            {% for song in songs[5:8] %}
-            <div class="song-card-homepage">
-                <div class="song-media">
-                    <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
-                    <audio controls>
-                        <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-                <div class="song-details">
-                    <p>Title: {{ song.song_title }}</p>
-                    <p>Artist: {{ song.artist_name }}</p>
-                    <p>Release Year: {{ song.release_year }}</p>
-                    <p>Album: {{ song.album }}</p>
-                    <p>Genre: {{ song.genre }}</p>
-                    <div class="rate-button-songs">
-                        <a href="{{ url_for('song_rating', id=song.id) }}">Rate it</a>
-                    </div>
+    <div class="songs-container">
+        <div id="homepage-introduction">
+            <h1>Featured Songs Today</h1>
+        </div>
+        {% for song in songs[5:8] %}
+        <div class="song-card">
+            <div class="song-media">
+                <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+                <audio controls>
+                    <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="song-details">
+                <h2>Song Infomation</h2>
+                <p>Title: {{ song.song_title }}</p>
+                <p>Artist: {{ song.artist_name }}</p>
+                <p>Release Year: {{ song.release_year }}</p>
+                <p>Album: {{ song.album }}</p>
+                <p>Genre: {{ song.genre }}</p>
+                <div class="rate-button-songs">
+                    <a href="{{ url_for('song_rating', id=song.id) }}">Rate it</a>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 </div>
 

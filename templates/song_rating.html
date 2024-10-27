@@ -6,15 +6,15 @@
         <h1>Rate your song</h1>
         <h4>Please answer the following questions</h4>
     </div>
-    <div class="rating-page-song-info-container">
-        <div class="rating-page-song-media">
+    <div id="rating-page-song-card">
+        <div id="rating-page-song-media">
             <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
             <audio controls>
                 <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
-        <div class="rating-page-song-details">
+        <div id="rating-page-song-details">
             <h2>Song Infomation</h2>
             <p>Title: {{ song.song_title }}</p>
             <p>Artist: {{ song.artist_name }}</p>
@@ -23,36 +23,28 @@
             <p>Genre: {{ song.genre }}</p>
         </div>
     </div>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
+
 
         <div id="song-rating-form">
             <form method="post" enctype="multipart/form-data">
                 <h2>Rating Form</h2>
                 <label for="song_rating">What would you rate the song out of 5?:</label>
-                <input type="number" id="song_rating" name="song_rating" min="1" max="5">
+                <input type="number" id="song_rating" name="song_rating" min="1" max="5" required>
         
                 <label for="listen_again">Would you listen to it again?</label>
-                <input type="text" id="listen_again" name="listen_again" placeholder="Yes or No">
+                <input type="text" id="listen_again" name="listen_again" placeholder="Yes or No" required>
         
                 <label for="recommend">Would you recommend it to others?</label>
-                <input type="text" id="recommend" name="recommend" placeholder="Yes or No">
+                <input type="text" id="recommend" name="recommend" placeholder="Yes or No" required>
         
                 <label for="other_songs_by_artist">Other songs by this artist:</label>
-                <input type="text" id="other_songs_by_artist" name="other_songs_by_artist">
+                <input type="text" id="other_songs_by_artist" name="other_songs_by_artist" placeholder="Just name 1 or 2" required>
         
                 <label for="lyrics_rating">Did you like the lyrics?</label>
-                <input type="text" id="lyrics_rating" name="lyrics_rating">
+                <input type="text" id="lyrics_rating" name="lyrics_rating" required>
       
                 <label for="guessed_genre">What genre do you think it is?</label>
-                <input type="text" id="guessed_genre" name="guessed_genre">
+                <input type="text" id="guessed_genre" name="guessed_genre" required>
 
                 <div id="submit-form-button">
                     <button type="submit">Submit Rating</button>

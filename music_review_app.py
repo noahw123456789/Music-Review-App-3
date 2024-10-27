@@ -43,7 +43,7 @@ def song_rating(id):
         guessed_genre = request.form.get('guessed_genre')
 
         if not song_rating or not listen_again or not recommend or not other_songs_by_artist or not lyrics_rating or not guessed_genre:
-            flash('All fields are required')
+            flash('Please fill out all fields!')
         else:
             conn.execute('INSERT INTO users-ratings (song_id, song_rating, listen_again, recommend, other_songs_by_artist, lyrics_rating, guessed_genre) VALUES (?, ?, ?, ?, ?, ?, ?)',
                         (id, song_rating, listen_again, recommend, other_songs_by_artist, lyrics_rating, guessed_genre))

@@ -113,8 +113,8 @@ li img{
     width: 270px;
     font-weight: bold;
     font-family: 'Inter';
-    margin-top: 60px;
-    margin-left: 340px;
+    margin-top: 30px;
+    margin-left: 550px;
     text-decoration: none;
     font-size: 18pt;
     border-radius: 10px;
@@ -124,10 +124,94 @@ li img{
     background-color: #dca707;
 }
 
-#homepage-songs-container{
+.songs-container{
+    margin: 0 auto;
+    width: 1750px;
+}
+
+.songs-container h1{
+    padding-top: 550px;
+    font-family: 'Inter';
+    font-size: 20pt;
+    background-color: #F4F1E7;
+    width: 300px;
+    margin-right: 1800px;
+    border-radius: 8px;
+    padding: 10px;
     float: left;
 }
 
+
+.song-card {
+    width: 503px; 
+    padding: 20px;
+    display: flex;
+    height: 360px;
+    float: left; 
+    margin: 20px 20px 100px 20px;
+    background-color: #F4F1E7;
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.song-media img {
+    width: 250px;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.song-media audio{
+    width: 250px;
+    display: flex;
+    border-radius: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-top: 25px;
+}
+
+.song-details {
+    margin: -17.99px 30px 0 20px;
+    font-family: 'Inter';
+    width: 300px;
+    font-weight: 400;
+    font-size: 12pt;
+    color: #333;
+}
+
+.song-details h2 {
+    font-family: 'Inter';
+    font-size: 16pt;
+}
+
+.song-details p {
+    padding-top: 10px;
+}
+
+
+.rate-button-songs{
+    position: absolute;
+    bottom: 50px;
+    right: 55px;
+}
+
+.rate-button-songs a{
+    background-color: #E6AF07;
+    color: #333;
+    padding: 10px 20px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    float: right;
+    margin-top: 25px;
+    margin-right: -20px;
+    display: flex;
+    font-family: 'Inter';
+
+}
+
+.rate-button-songs a:hover{
+    background-color: #dca707;
+    cursor: pointer;
+}
 
 
 
@@ -142,61 +226,6 @@ li img{
     width: 1600px;
 }
 
-.song-card-homepage {
-    background-color: #F4F1E7;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    margin: 0 15px 25px 15px;
-    width: 450px;
-    height: 500px;
-    display: inline-flex;
-}
-
-.song-card-homepage :first-child{
-    margin-left: 0px;
-}
-
-.rating-page-song-media {
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.song-media img {
-    width: 190px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-.rating-page-song-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.song-details p {
-    margin: 5px 0;
-}
-.song-card-homepage audio {
-    width: 190px;
-    margin-top: 10px;
-}
-.rate-button-songs a{
-    background-color: #d9d9d9;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: right;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 10px 0 0 150px;
-    border-radius: 4px;
-}
-.rate-button-songs a:hover{
-    background-color: #b0b0b0;
-    cursor: pointer;
-}
 
 
 
@@ -214,12 +243,16 @@ li img{
 #rating-page-container{
     width: 1500px;
     margin: 0 auto;
-
+    justify-content: space-between; 
+    display: inline;
 }
+
 #rating-page-introduction{
     width: 400px;
     font-size: X-large;
+    margin-left: 125px;
     font-family: 'Inter';
+    color: #333;
     margin-top: 80px;
 }
 
@@ -235,24 +268,24 @@ li img{
 
 /* Rating Page Song */
 
-.rating-page-song-info-container {
+#rating-page-song-card {
     width: 670px; 
-    margin: 55px 50px 0 0;
-    float: left;
+    margin: 55px 50px 0 125px;
     padding: 20px; 
+    float: left;
     display: flex;
     background-color: #F4F1E7;
     border-radius: 8px;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
 }
 
-.rating-page-song-media img {
+#rating-page-song-media img {
     width: 315px;
     border-radius: 4px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.rating-page-song-media audio{
+#rating-page-song-media audio{
     width: 315px;
     display: flex;
     border-radius: 250px;
@@ -260,28 +293,35 @@ li img{
     margin-top: 20px;
 }
 
-.rating-page-song-details {
+#rating-page-song-details {
     margin: -17.99px 30px 0 20px;
     font-family: 'Inter';
     width: 300px;
+    color: #333;
     height: 406px;
     font-weight: 400;
-    vertical-align: middle;
     font-size: 13pt;
 }
-.rating-page-song-details h2 {
+
+#rating-page-song-details h2 {
     font-family: 'Inter';
     font-size: 1.5em;
 }
+
+#rating-page-song-details p {
+    padding-top: 10px;
+}
+
 /* Rating Page Form */
 
 #song-rating-form {
     width: 517px; 
-    margin: -45px 50px 500px 0;
-    float: right;
+    margin: -45px 125px 500px 0;
     padding: 20px; 
     background-color: #F4F1E7;
     border-radius: 8px;
+    color: #333;
+    float: right;
     box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
 }
 
@@ -289,6 +329,7 @@ li img{
     font-size: 2.2em;
     font-family: 'Inter';
     margin-top: 0;
+    color: #333;
 }
 
 form {
@@ -319,7 +360,7 @@ form input[type="number"] {
     color: #333;
     padding: 10px; 
     border: none; 
-    font: 'Int';
+    font: 'Inter';
     border-radius: 4px; 
     margin-top: 15px;
     cursor: pointer; 
