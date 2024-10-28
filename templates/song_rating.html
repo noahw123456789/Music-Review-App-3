@@ -28,23 +28,20 @@
         <div id="song-rating-form">
             <form method="post" enctype="multipart/form-data">
                 <h2>Rating Form</h2>
-                <label for="song_rating">What would you rate the song out of 5?:</label>
-                <input type="number" id="song_rating" name="song_rating" min="1" max="5" required>
+                <label for="rating">What would you rate the song out of 5?</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
         
                 <label for="listen_again">Would you listen to it again?</label>
                 <input type="text" id="listen_again" name="listen_again" placeholder="Yes or No" required>
         
-                <label for="recommend">Would you recommend it to others?</label>
-                <input type="text" id="recommend" name="recommend" placeholder="Yes or No" required>
+                <label for="mood">One word which best describes the songs mood?</label>
+                <input type="text" id="mood" name="mood" placeholder="Energetic, Sad, Celebration?" required>
         
-                <label for="other_songs_by_artist">Other songs by this artist:</label>
+                <label for="other_songs_by_artist">Have you listened to any other songs by the artist</label>
                 <input type="text" id="other_songs_by_artist" name="other_songs_by_artist" placeholder="Just name 1 or 2" required>
         
-                <label for="lyrics_rating">Did you like the lyrics?</label>
-                <input type="text" id="lyrics_rating" name="lyrics_rating" required>
-      
-                <label for="guessed_genre">What genre do you think it is?</label>
-                <input type="text" id="guessed_genre" name="guessed_genre" required>
+                <label for="lyrics_rating">What would you rate the lyrics out of 5</label>
+                <input type="number" id="lyrics_rating" name="lyrics_rating" min="1" max="5" required>
 
                 <div id="submit-form-button">
                     <button type="submit">Submit Rating</button>

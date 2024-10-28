@@ -35,18 +35,17 @@ def song_rating(id):
     song = conn.execute('SELECT * FROM songs WHERE id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
-        song_rating = request.form.get('song_rating')
+        rating = request.form.get('rating')
         listen_again = request.form.get('listen_again')
-        recommend = request.form.get('recommend')
+        mood = request.form.get('mood')
         other_songs_by_artist = request.form.get('other_songs_by_artist')
         lyrics_rating = request.form.get('lyrics_rating')
-        guessed_genre = request.form.get('guessed_genre')
 
-        if not song_rating or not listen_again or not recommend or not other_songs_by_artist or not lyrics_rating or not guessed_genre:
+        if not rating or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
             flash('Please fill out all fields!')
         else:
-            conn.execute('INSERT INTO users-ratings (song_id, song_rating, listen_again, recommend, other_songs_by_artist, lyrics_rating, guessed_genre) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                        (id, song_rating, listen_again, recommend, other_songs_by_artist, lyrics_rating, guessed_genre))
+            conn.execute('INSERT INTO users_ratings (rating, listen_again, mood, other_songs_by_artist, lyrics_rating) VALUES (?, ?, ?, ?, ?)',
+                        (rating, listen_again, mood, other_songs_by_artist, lyrics_rating))
             conn.commit()
             conn.close()
             return redirect(url_for('all_songs'))
