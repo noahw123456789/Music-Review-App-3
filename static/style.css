@@ -365,3 +365,13 @@ form input[type="number"] {
 #submit-form-button button:hover {
     background-color: #dca707; 
 }
+
+
+/* Ratings Table */
+
+#ratings-table th{
+    padding: 20px;
+}
+#ratings-table td{
+    padding: 20px;
+}

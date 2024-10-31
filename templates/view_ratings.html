@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
-
-{% block content %}  
-
+{% block content %}
 <h2>All Ratings</h2>
-
 <div id="ratings-table">
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Platform</th>
-                <th>Genre</th>
-                <th>Year</th>
-                <th>Sales</th>
-                <th>Thumbnail</th>
+                <th>Song Title</th>
+                <th>Song ID</th>
+                <th>Rating</th>
+                <th>Listen Again</th>
+                <th>Other Songs by Artist</th>
+                <th>Lyrics Rating</th>
+                <th>Mood</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,9 +20,9 @@
             {% for rating in ratings %}
             <tr>
                 <td>{{ rating.rating_id }}</td>
-                <td>{{ rating.song_id }}</td>
+                <td>{{ rating.song_title }}</td>
                 <td>{{ rating.rating }}</td>
-                <td>{{ rating.listen_again }}</td>                
+                <td>{{ rating.listen_again }}</td>
                 <td>{{ rating.other_songs_by_artist }}</td>
                 <td>{{ rating.lyrics_rating }}</td>
                 <td>{{ rating.mood }}</td>
@@ -34,14 +32,13 @@
                         <form action="{{ url_for('delete_rating', id=rating.rating_id) }}">
                             <button type="submit">Delete</button>
                         </form>
-                     </div>
+                    </div>
                 </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    {% endblock %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
 </body>
 </html>
