@@ -31,6 +31,7 @@ def all_songs():
 
 @app.route('/rate/<int:id>', methods=['GET', 'POST'])
 def song_rating(id):
+
     conn = get_db_connection()
     song = conn.execute('SELECT * FROM songs WHERE id = ?', (id,)).fetchone()
 
@@ -45,13 +46,13 @@ def song_rating(id):
             flash('Please fill out all fields!')
         else:
             cursor = conn.cursor()
+            conn = get_db_connection()
+            conn.execute('INSERT INTO ratings (rating, listen_again, other_songs_by_artist, lyrics_rating, mood) VALUES (?, ?, ?, ?, ?, ?)',
+            (id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood))
 
-            conn.execute(''' INSERT INTO ratings (ratings.rating_id, ratings.song_id, ratings.rating, ratings.listen_again, ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, songs.song_title) VALUES (?, ?, ?, ?, ?, ?)
-                        JOIN songs ON ratings.song_id = songs.id '''
-                        (rating, listen_again, mood, other_songs_by_artist, lyrics_rating, id))
 
             conn.commit()
-            cursor.close()  # Close the cursor immediately after use
+            cursor.close()
             conn.close()  # Close the connection immediately after use
             return redirect(url_for('view_ratings'))
 
@@ -61,23 +62,28 @@ def song_rating(id):
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_rating(id):
     conn = get_db_connection()
-    rating = conn.execute('SELECT * FROM ratings WHERE rating_id = ?', (id,)).fetchone()
+    song = conn.execute('SELECT * FROM songs WHERE rating_id = ?', (id,)).fetchone()
+
     if request.method == 'POST':
-        rating_value = request.form.get('rating')
+        rating = request.form.get('rating')
         listen_again = request.form.get('listen_again')
         mood = request.form.get('mood')
         other_songs_by_artist = request.form.get('other_songs_by_artist')
         lyrics_rating = request.form.get('lyrics_rating')
-        if not rating_value or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
+
+        if not rating or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
             flash('Please fill out all fields!')
         else:
-            cursor = conn.cursor()  # Open a new cursor
-            cursor.execute('UPDATE ratings SET rating = ?, listen_again = ?, mood = ?, other_songs_by_artist = ?, lyrics_rating = ? WHERE rating_id = ?',
-                           (rating_value, listen_again, mood, other_songs_by_artist, lyrics_rating, id))
+            cursor = conn.cursor()
+            conn.execute('UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
+                           (rating, listen_again, other_songs_by_artist, lyrics_rating, mood))
+
             conn.commit()
-            cursor.close()  # Close the cursor immediately after use
-            conn.close()  # Close the connection immediately after use
+            cursor.close()
+            conn.close()
+
             return redirect(url_for('view_ratings'))
+
     conn.close()
     return render_template('edit_rating.html', rating=rating)
 
@@ -86,26 +92,24 @@ def delete_game(id):
     # Connect to the database
     conn = get_db_connection()
     # Execute the DELETE statement
-    conn.execute('DELETE FROM games WHERE id = ?', (id,))
+    conn.execute('DELETE FROM ratings WHERE id = ?', (id,))
     # Commit the changes
     conn.commit()
     # Close the connection
     conn.close()
-    # Redirect to the 'view_games' page
-    return redirect(url_for('view_games'))
+
+    return redirect(url_for('view_ratings'))
 
 @app.route('/ratings')
 def view_ratings():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT ratings.rating_id, ratings.song_id, ratings.rating, ratings.listen_again,
-               ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, songs.song_title
-        FROM ratings
-        JOIN songs ON ratings.song_id = songs.id
-    """)
+                SELECT ratings.rating_id, ratings.song_id, ratings.rating, ratings.listen_again, 
+                    ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, songs.song_title
+                FROM ratings
+                JOIN songs ON ratings.song_id = songs.id""")
     ratings = cursor.fetchall()
-    cursor.close()  # Close the cursor immediately after use
     conn.close()  # Close the connection immediately after use
     return render_template('view_ratings.html', ratings=ratings)
 
