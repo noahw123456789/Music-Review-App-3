@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="songs-container">
-    <div id="all-songs-introduction">
+    <div class="page-introduction">
         <h1>Featured Songs</h1>
     </div>
     {% for song in songs[5:8] %}
@@ -28,8 +28,9 @@
     </div>
 
     {% endfor %}
-
-    <h1>All Songs</h1>
+    <div class="page-introduction">
+        <h1>All Songs</h1>
+    </div>
     {% for song in songs %}
     <div class="song-card">
         <div class="song-media">

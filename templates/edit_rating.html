@@ -1,17 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>All Songs</title>
-
-</head>
-<body>
-
 {% extends 'base.html' %}
 
 {% block content %}
+
+
+<div id="rating-page-container">
+    <div id="rating-page-introduction">
+        <h1>Rate your song</h1>
+        <h4>Please answer the following questions</h4>
+    </div>
+    <div id="rating-page-song-card">
+        <div id="rating-page-song-media">
+            <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
+            <audio controls>
+                <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div id="rating-page-song-details">
+            <h2>Song Infomation</h2>
+            <p>Title: {{ song.song_title }}</p>
+            <p>Artist: {{ song.artist_name }}</p>
+            <p>Release Year: {{ song.release_year }}</p>
+            <p>Album: {{ song.album }}</p>
+            <p>Genre: {{ song.genre }}</p>
+        </div>
+    </div>
+
+        <div id="song-rating-form">
+            <form method="post">
+                <h2>Edit Rating Form</h2>
+
+                <label for="rating">What would you rate the song out of 5?</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" value="{{ratings.rating}}" required>
+        
+                <label for="listen_again">Would you listen to it again?</label>
+                <input type="text" id="listen_again" name="listen_again" placeholder="Yes or No" value="{{ratings.listen_again}}" required>
+        
+                <label for="mood">One word which best describes the songs mood?</label>
+                <input type="text" id="mood" name="mood" placeholder="Energetic, Sad, Celebration?" value="{{ratings.mood}}" required>
+        
+                <label for="other_songs_by_artist">Have you listened to any other songs by the artist</label>
+                <input type="text" id="other_songs_by_artist" name="other_songs_by_artist" placeholder="Just name 1 or 2" value="{{ratings.other_songs_by_artist}}" required>
+        
+                <label for="lyrics_rating">What would you rate the lyrics out of 5</label>
+                <input type="number" id="lyrics_rating" name="lyrics_rating" min="1" max="5" value="{{ratings.lyrics_rating}}" required>
+
+                <div id="submit-form-button">
+                    <button type="submit">Submit Rating</button>
+                </div>
+            </form>
+        </div>
+</div>
+
+
+{% endblock %}
 
 </body>

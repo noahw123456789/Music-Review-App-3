@@ -58,30 +58,28 @@ def song_rating(id):
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_rating(id):
     conn = get_db_connection()
-    song = conn.execute('SELECT * FROM songs WHERE rating_id = ?', (id,)).fetchone()
+    song = conn.execute('SELECT * FROM songs WHERE id = ?', (id,)).fetchone()
+    rating = conn.execute('SELECT * FROM ratings WHERE rating_id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
-        rating = request.form.get('rating')
-        listen_again = request.form.get('listen_again')
-        mood = request.form.get('mood')
-        other_songs_by_artist = request.form.get('other_songs_by_artist')
-        lyrics_rating = request.form.get('lyrics_rating')
+        rating = request.form('rating')
+        listen_again = request.form('listen_again')
+        mood = request.form('mood')
+        other_songs_by_artist = request.form('other_songs_by_artist')
+        lyrics_rating = request.form('lyrics_rating')
 
         if not rating or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
             flash('Please fill out all fields!')
         else:
-            cursor = conn.cursor()
+            conn = get_db_connection()
             conn.execute('UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
-                           (rating, listen_again, other_songs_by_artist, lyrics_rating, mood))
-
+                           (rating, listen_again, other_songs_by_artist, lyrics_rating, mood, id))
             conn.commit()
-            cursor.close()
             conn.close()
-
             return redirect(url_for('view_ratings'))
 
     conn.close()
-    return render_template('edit_rating.html', rating=rating)
+    return render_template('edit_rating.html', rating=rating, song=song)
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_rating(id):

@@ -127,14 +127,14 @@ li img{
     width: 1750px;
 }
 
-.songs-container h1{
+.page-introduction h1{
     padding-top: 550px;
     font-family: 'Inter';
     font-size: 20pt;
     background-color: #F4F1E7;
-    margin-right: 1200px;
     border-radius: 8px;
     padding: 10px;
+    margin-right: 1200px;
     float: left;
 }
 
@@ -340,18 +340,27 @@ form input[type="number"] {
     font-size: 16pt; 
 }
 
-#submit-form-button button:hover {
-    background-color: #dca707; 
+
+/* View Ratings Table */
+
+#ratings-page-container{
+    width: 1700px;
+    margin: auto auto;
+    text-align: center;
 }
 
+.page-introduction{
+    width: fit-content;
+    font-size: 16pt;
+    background-color: #F4F1E7;
+    color: #333;
 
-/* Ratings Table */
-
+}
 
 #ratings-table {
     width: 1650px;
     margin: 20px auto;
-    border-collapse: collapse;
+    float: left;
     background-color: #F4F1E7;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
