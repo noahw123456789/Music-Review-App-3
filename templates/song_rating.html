@@ -9,10 +9,12 @@
     <div id="rating-page-song-card">
         <div id="rating-page-song-media">
             <img src="{{ url_for('static', filename='Images/Song-Covers/' ~ song.thumbnail) }}" alt="Song Thumbnail">
-            <audio controls>
-                <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
+            <div id="rating-audio-controls">
+                <audio controls>
+                    <source src="{{ url_for('static', filename='Songs/' ~ song.audio) }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
         </div>
         <div id="rating-page-song-details">
             <h2>Song Infomation</h2>

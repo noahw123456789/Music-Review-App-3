@@ -258,11 +258,66 @@ li img{
 }
 
 #rating-page-song-media audio{
-    width: 315px;
     display: flex;
     border-radius: 250px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     margin-top: 20px;
+}
+
+
+audio::-webkit-media-controls-panel{
+    background-color: #E6AF07;
+    border-style: solid;
+    border-width: 10px;
+}
+
+audio::-webkit-media-controls-time-remaining-display {
+    color: #333;
+    text-shadow: none;
+    background-color: #E6AF07;
+  }
+  
+audio::-webkit-media-controls-current-time-display {
+    color: #333;
+    padding-left: 5px;
+    background-color: #E6AF07;
+    text-shadow: none;
+}
+
+audio::-webkit-media-controls-play-button {
+    padding-right: 10px;
+    background-color: #E6AF07;
+    border-radius: 50%;
+    opacity: 80%;
+    color: #333;
+    height: 32px;
+    margin-left: -5px;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: #dca707;
+}
+
+#rating-audio-controls audio::-webkit-media-controls-timeline {
+    box-shadow: none;
+    text-shadow: none;
+}
+
+audio::-webkit-media-controls-timeline {
+    width: 95px;
+}
+
+audio::-webkit-media-controls-mute-button {
+    background-color: #E6AF07;
+    border-radius: 100px;
+    opacity: 80%;
+    width: 1px;
+    margin-left: -5px;
+  }
+
+audio::-webkit-media-controls-mute-button:hover {
+    background-color: solid red;
+
 }
 
 #rating-page-song-details {
@@ -270,7 +325,6 @@ li img{
     font-family: 'Inter';
     width: 300px;
     color: #333;
-    height: 406px;
     font-weight: 400;
     font-size: 13pt;
 }
@@ -332,12 +386,17 @@ form input[type="number"] {
     color: #333;
     padding: 10px; 
     border: none; 
-    font: 'Inter';
-    border-radius: 4px; 
+    font-family: 'Inter';
+    border-radius: 5px; 
     margin-top: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer; 
     float: right;
     font-size: 16pt; 
+}
+
+#submit-form-button button:hover{
+    background-color: #dca707;
 }
 
 

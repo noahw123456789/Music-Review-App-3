@@ -55,31 +55,43 @@ def song_rating(id):
     conn.close()
     return render_template('song_rating.html', song=song)
 
+
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_rating(id):
     conn = get_db_connection()
-    song = conn.execute('SELECT * FROM songs WHERE id = ?', (id,)).fetchone()
+
+    # Retrieve the rating and corresponding song information
     rating = conn.execute('SELECT * FROM ratings WHERE rating_id = ?', (id,)).fetchone()
+    song = conn.execute('''
+        SELECT songs.song_title, songs.artist_name, songs.release_year, songs.album, songs.genre, songs.thumbnail, songs.audio
+        FROM songs
+        JOIN ratings ON ratings.song_id = songs.id
+        WHERE ratings.rating_id = ?''', (id,)).fetchone()
 
     if request.method == 'POST':
-        rating = request.form('rating')
-        listen_again = request.form('listen_again')
-        mood = request.form('mood')
-        other_songs_by_artist = request.form('other_songs_by_artist')
-        lyrics_rating = request.form('lyrics_rating')
+        # Use .get() for form fields to prevent errors
+        rating_value = request.form.get('rating')
+        listen_again = request.form.get('listen_again')
+        mood = request.form.get('mood')
+        other_songs_by_artist = request.form.get('other_songs_by_artist')
+        lyrics_rating = request.form.get('lyrics_rating')
 
-        if not rating or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
+        # Ensure all fields are filled
+        if not (rating_value and listen_again and mood and other_songs_by_artist and lyrics_rating):
             flash('Please fill out all fields!')
         else:
-            conn = get_db_connection()
-            conn.execute('UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
-                           (rating, listen_again, other_songs_by_artist, lyrics_rating, mood, id))
+            # Update the rating in the database
+            conn.execute(
+                'UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
+                (rating_value, listen_again, other_songs_by_artist, lyrics_rating, mood, id)
+            )
             conn.commit()
             conn.close()
             return redirect(url_for('view_ratings'))
 
     conn.close()
-    return render_template('edit_rating.html', rating=rating, song=song)
+    return render_template('edit_rating.html', ratings=rating, song=song)
+
 
 @app.route('/delete/<int:id>', methods=['POST'])
 def delete_rating(id):
@@ -104,7 +116,7 @@ def view_ratings():
                ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, 
                songs.song_title 
         FROM ratings 
-        JOIN songs ON ratings.song_id = songs.id
+        INNER JOIN songs ON ratings.song_id = songs.id
     """)
     ratings = cursor.fetchall()
     cursor.close()
