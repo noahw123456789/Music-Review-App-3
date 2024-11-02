@@ -67,6 +67,9 @@ li img{
 
 }
 
+/* Index Page */
+
+
 #index-container{
     width: 1920px;
     margin: 0 auto;
@@ -207,31 +210,6 @@ li img{
     cursor: pointer;
 }
 
-
-
-
-#song-page-top-container {
-    width: 1800px;
-    margin: 40px auto;
-}
-
-#song-page-bottom-container {
-    margin: 40px auto;
-    width: 1600px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Song Rating Page */
 
 #rating-page-container{
@@ -242,7 +220,7 @@ li img{
 }
 
 #rating-page-introduction{
-    width: 400px;
+    width: fit-content;
     font-size: X-large;
     margin-left: 125px;
     font-family: 'Inter';
@@ -257,7 +235,7 @@ li img{
 
 #rating-page-introduction h4{
     font-weight: 450;
-    font-size: 1.17em;
+    font-size: 1.2em;
 }
 
 /* Rating Page Song */
@@ -369,9 +347,74 @@ form input[type="number"] {
 
 /* Ratings Table */
 
-#ratings-table th{
-    padding: 20px;
+
+#ratings-table {
+    width: 1650px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #F4F1E7;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-#ratings-table td{
-    padding: 20px;
+
+#ratings-table table {
+    width: 1650px;
+    border-collapse: collapse;
+}
+
+#ratings-table th {
+    background-color: #E6AF07;
+    color: #FFF;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#ratings-table td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+}
+
+#ratings-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#ratings-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#edit-button a{
+    background-color: #E6AF07;
+    color: #333;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    margin: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 11pt;
+    float: left;
+}
+
+#delete-button button{
+    background-color: #E6AF07;
+    color: #333;
+    padding: 8px 15px;
+    border: none;
+    float: left;
+    border-radius: 4px;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 11pt;
+}
+
+#edit-button a:hover, #edit-button button:hover {
+    background-color: #dca707;
 }

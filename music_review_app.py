@@ -31,31 +31,27 @@ def all_songs():
 
 @app.route('/rate/<int:id>', methods=['GET', 'POST'])
 def song_rating(id):
-
     conn = get_db_connection()
     song = conn.execute('SELECT * FROM songs WHERE id = ?', (id,)).fetchone()
-
     if request.method == 'POST':
+
         rating = request.form.get('rating')
         listen_again = request.form.get('listen_again')
         mood = request.form.get('mood')
         other_songs_by_artist = request.form.get('other_songs_by_artist')
         lyrics_rating = request.form.get('lyrics_rating')
 
-        if not rating or not listen_again or not mood or not other_songs_by_artist or not lyrics_rating:
+        if not (rating and listen_again and mood and other_songs_by_artist and lyrics_rating):
             flash('Please fill out all fields!')
         else:
-            cursor = conn.cursor()
-            conn = get_db_connection()
-            conn.execute('INSERT INTO ratings (rating, listen_again, other_songs_by_artist, lyrics_rating, mood) VALUES (?, ?, ?, ?, ?, ?)',
-            (id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood))
 
-
+            conn.execute(
+                'INSERT INTO ratings (song_id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood) VALUES (?, ?, ?, ?, ?, ?)',
+                (id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood)
+            )
             conn.commit()
-            cursor.close()
-            conn.close()  # Close the connection immediately after use
+            conn.close()
             return redirect(url_for('view_ratings'))
-
     conn.close()
     return render_template('song_rating.html', song=song)
 
@@ -88,11 +84,11 @@ def edit_rating(id):
     return render_template('edit_rating.html', rating=rating)
 
 @app.route('/delete/<int:id>', methods=['POST'])
-def delete_game(id):
+def delete_rating(id):
     # Connect to the database
     conn = get_db_connection()
     # Execute the DELETE statement
-    conn.execute('DELETE FROM ratings WHERE id = ?', (id,))
+    conn.execute('DELETE FROM ratings WHERE rating_id = ?', (id,))
     # Commit the changes
     conn.commit()
     # Close the connection
@@ -104,13 +100,17 @@ def delete_game(id):
 def view_ratings():
     conn = get_db_connection()
     cursor = conn.cursor()
+
     cursor.execute("""
-                SELECT ratings.rating_id, ratings.song_id, ratings.rating, ratings.listen_again, 
-                    ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, songs.song_title
-                FROM ratings
-                JOIN songs ON ratings.song_id = songs.id""")
+        SELECT ratings.rating_id, ratings.rating, ratings.listen_again, 
+               ratings.other_songs_by_artist, ratings.lyrics_rating, ratings.mood, 
+               songs.song_title 
+        FROM ratings 
+        JOIN songs ON ratings.song_id = songs.id
+    """)
     ratings = cursor.fetchall()
-    conn.close()  # Close the connection immediately after use
+    cursor.close()
+    conn.close()
     return render_template('view_ratings.html', ratings=ratings)
 
 @app.route('/contact')
