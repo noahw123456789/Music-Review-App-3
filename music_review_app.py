@@ -69,7 +69,7 @@ def edit_rating(id):
         WHERE ratings.rating_id = ?''', (id,)).fetchone()
 
     if request.method == 'POST':
-        # Use .get() for form fields to prevent errors
+        # Use .get() for forrm fields to prevent errors
         rating_value = request.form.get('rating')
         listen_again = request.form.get('listen_again')
         mood = request.form.get('mood')
