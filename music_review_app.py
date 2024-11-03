@@ -45,10 +45,8 @@ def song_rating(id):
             flash('Please fill out all fields!')
         else:
 
-            conn.execute(
-                'INSERT INTO ratings (song_id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood) VALUES (?, ?, ?, ?, ?, ?)',
-                (id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood)
-            )
+            conn.execute('INSERT INTO ratings (song_id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood) VALUES (?, ?, ?, ?, ?, ?)',
+                (id, rating, listen_again, other_songs_by_artist, lyrics_rating, mood))
             conn.commit()
             conn.close()
             return redirect(url_for('view_ratings'))
@@ -64,7 +62,7 @@ def edit_rating(id):
     song = conn.execute('''
         SELECT songs.song_title, songs.artist_name, songs.release_year, songs.album, songs.genre, songs.thumbnail, songs.audio
         FROM songs
-        JOIN ratings ON ratings.song_id = songs.id
+        INNER JOIN ratings ON ratings.song_id = songs.id
         WHERE ratings.rating_id = ?''', (id,)).fetchone()
 
     if request.method == 'POST':
@@ -80,10 +78,8 @@ def edit_rating(id):
             flash('Please fill out all fields!')
         else:
             # Update the rating in the database
-            conn.execute(
-                'UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
-                (rating_value, listen_again, other_songs_by_artist, lyrics_rating, mood, id)
-            )
+            conn.execute('UPDATE ratings SET rating = ?, listen_again = ?, other_songs_by_artist = ?, lyrics_rating = ?, mood = ? WHERE rating_id = ?',
+                (rating_value, listen_again, other_songs_by_artist, lyrics_rating, mood, id))
             conn.commit()
             conn.close()
             return redirect(url_for('view_ratings'))
