@@ -60,7 +60,6 @@ def song_rating(id):
 def edit_rating(id):
     conn = get_db_connection()
 
-    # Retrieve the rating and corresponding song information
     rating = conn.execute('SELECT * FROM ratings WHERE rating_id = ?', (id,)).fetchone()
     song = conn.execute('''
         SELECT songs.song_title, songs.artist_name, songs.release_year, songs.album, songs.genre, songs.thumbnail, songs.audio
