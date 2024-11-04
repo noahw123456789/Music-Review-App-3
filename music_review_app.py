@@ -6,6 +6,10 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
 
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 def get_db_connection():
     conn = sqlite3.connect('musicreview.db')
     conn.row_factory = sqlite3.Row
@@ -121,6 +125,7 @@ def view_ratings():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
